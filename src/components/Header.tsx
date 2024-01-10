@@ -20,7 +20,8 @@ export function Header() {
   return (
     <header>
       <nav className='bg-white border-b border-gray-200 dark:bg-gray-900'>
-        <div className='flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto'>
+        <div className='flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto md:flex-nowrap'>
+          {/* // ! { Flex no wrap para que no colapse la búsqueda y el theme} */}
           <Link
             to='/'
             className='flex items-center space-x-3 rtl:space-x-reverse'
