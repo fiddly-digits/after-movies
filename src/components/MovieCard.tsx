@@ -30,7 +30,7 @@ export function MovieCard({ movie }: props) {
         />
       </div>
       <div className='flex flex-col items-baseline justify-between p-5 grow'>
-        <Link to='#'>
+        <Link to={`/movie/${id}`}>
           <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-800 dark:hover:text-blue-600'>
             {title}
           </h5>
