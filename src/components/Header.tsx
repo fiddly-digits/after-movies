@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import logo from '../assets/morningafter.png';
 import { useEffect, useState } from 'react';
 import { cn } from '../utils/themeMerge';
@@ -9,6 +9,7 @@ export function Header() {
   const [darkMode, setDarkMode] = useState(
     JSON.parse(localStorage.getItem('darkMode') || 'false')
   );
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
@@ -17,9 +18,16 @@ export function Header() {
       : document.documentElement.classList.remove('dark');
   }, [darkMode]);
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const queryTerm = event.currentTarget.search.value;
+    event.currentTarget.reset();
+    return navigate(`/search?q=${queryTerm}`);
+  };
+
   return (
     <header>
-      <nav className='bg-white border-b border-gray-200 dark:bg-gray-900'>
+      <nav className='bg-white border-gray-200 shadow-lg dark:bg-gray-900'>
         <div className='flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto md:flex-nowrap'>
           {/* // ! { Flex no wrap para que no colapse la búsqueda y el theme} */}
           <Link
@@ -109,13 +117,16 @@ export function Header() {
                 </svg>
                 <span className='sr-only'>Search icon</span>
               </div>
-              <input
-                type='text'
-                id='search-navbar'
-                className='block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                placeholder='Search...'
-                autoComplete='off'
-              />
+              <form onSubmit={handleSubmit}>
+                <input
+                  type='text'
+                  name='search'
+                  id='search-navbar'
+                  className='block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                  placeholder='Search...'
+                  autoComplete='off'
+                />
+              </form>
             </div>
             <button
               onClick={() => setMenuHidden(!menuHidden)}
@@ -167,13 +178,16 @@ export function Header() {
                   />
                 </svg>
               </div>
-              <input
-                type='text'
-                id='search-navbar'
-                className='block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-                placeholder='Search...'
-                autoComplete='off'
-              />
+              <form onSubmit={handleSubmit}>
+                <input
+                  type='text'
+                  name='search'
+                  id='search-navbar'
+                  className='block w-full p-2 text-sm text-gray-900 border border-gray-300 rounded-lg ps-10 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+                  placeholder='Search...'
+                  autoComplete='off'
+                />
+              </form>
             </div>
           </div>
           <div

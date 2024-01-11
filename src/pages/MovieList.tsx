@@ -12,7 +12,7 @@ export function MovieList({ api }: props) {
   return (
     <main>
       <section className='mx-auto max-w-7xl py-7'>
-        <div className='flex flex-wrap justify-center'>
+        <div className='flex flex-wrap justify-center other:justify-evenly'>
           {movies.map((movie) => (
             <MovieCard key={movie.id} movie={movie} />
           ))}

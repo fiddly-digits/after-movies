@@ -17,10 +17,10 @@ export function MovieCard({ movie }: props) {
     release_date: releaseDate
   } = movie;
   return (
-    <div className='max-w-sm m-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
-      <Link to='#'>
+    <div className='flex flex-col max-w-sm m-4 bg-white border border-gray-200 rounded-lg shadow dark:shadow-gray-700 dark:bg-gray-800 dark:border-gray-700'>
+      <div className='overflow-hidden rounded-t-lg max-h-52'>
         <img
-          className='rounded-t-lg max-h-52 w-fit'
+          className='rounded-t-lg w-fit hover:scale-110'
           src={
             backdropPath
               ? `https://image.tmdb.org/t/p/w500/${backdropPath}`
@@ -28,14 +28,14 @@ export function MovieCard({ movie }: props) {
           }
           alt=''
         />
-      </Link>
-      <div className='p-5 '>
+      </div>
+      <div className='flex flex-col items-baseline justify-between p-5 grow'>
         <Link to='#'>
-          <h5 className='mb-2 overflow-scroll text-2xl font-bold tracking-tight text-gray-900 no-scrollbar whitespace-nowrap dark:text-white'>
+          <h5 className='mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white hover:text-blue-800 dark:hover:text-blue-600'>
             {title}
           </h5>
         </Link>
-        <p className='mb-2 overflow-scroll text-sm font-medium tracking-tight text-gray-400 dark:text-gray-600 whitespace-nowrap no-scrollbar'>
+        <p className='mb-2 overflow-scroll text-sm font-medium tracking-tight text-gray-400 dark:text-gray-600 no-scrollbar'>
           {originalTitle}
         </p>
         <p className='mb-2 text-sm font-medium tracking-tight text-gray-400 dark:text-gray-600'>
