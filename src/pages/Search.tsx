@@ -1,16 +1,18 @@
-import { useSearchParams } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
+import { useSearchParams } from 'react-router-dom';
 import { MovieCard } from '../components';
 import { Movie } from '../types/types';
+import { useTitle } from '../hooks/useTitle';
 
 type props = {
-  api: string;
+  path: string;
 };
 
-export function Search({ api }: props) {
+export function Search({ path }: props) {
   const [searchParams] = useSearchParams();
   const queryTerm = searchParams.get('q');
-  const { data: movies } = useFetch<Movie[]>(api, 1, queryTerm || '');
+  const { data: movies } = useFetch<Movie[]>(path, 1, queryTerm || '');
+  useTitle(`Search`);
 
   return (
     <main>

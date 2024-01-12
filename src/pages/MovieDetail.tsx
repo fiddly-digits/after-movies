@@ -1,10 +1,12 @@
 import { useFetch } from '../hooks/useFetch';
 import { useParams } from 'react-router-dom';
 import { MovieData } from '../types/types';
+import { useTitle } from '../hooks/useTitle';
 
 export function MovieDetail() {
   const { id } = useParams();
   const { data: movie } = useFetch<MovieData>(`movie/${id}`);
+  useTitle(`${movie?.title}` ?? 'Movie Detail');
 
   if (!movie) {
     return <div>Loading...</div>;

@@ -1,13 +1,16 @@
-import { MovieCard } from '../components';
 import { useFetch } from '../hooks/useFetch';
+import { MovieCard } from '../components';
 import { Movie } from '../types/types';
+import { useTitle } from '../hooks/useTitle';
 
 type props = {
-  api: string;
+  path: string;
+  title: string;
 };
 
-export function MovieList({ api }: props) {
-  const { data: movies } = useFetch<Movie[]>(api);
+export function MovieList({ path, title }: props) {
+  const { data: movies } = useFetch<Movie[]>(path);
+  useTitle(title);
 
   return (
     <main>

@@ -5,21 +5,29 @@ export function Router() {
   return (
     <>
       <Routes>
-        <Route path='/' element={<MovieList api='movie/now_playing' />} />
+        <Route
+          path='/'
+          element={
+            <MovieList
+              path='movie/now_playing'
+              title='Home | Now Playing Movies'
+            />
+          }
+        />
         <Route path='movie/:id' element={<MovieDetail />} />
         <Route
           path='movies/popular'
-          element={<MovieList api='movie/popular' />}
+          element={<MovieList path='movie/popular' title='Popular Movies' />}
         />
         <Route
           path='movies/top'
-          element={<MovieList api='movie/top_rated' />}
+          element={<MovieList path='movie/top_rated' title='Top Movies' />}
         />
         <Route
           path='movies/upcoming'
-          element={<MovieList api='movie/upcoming' />}
+          element={<MovieList path='movie/upcoming' title='Upcoming Movies' />}
         />
-        <Route path='search' element={<Search api='search/movie' />} />
+        <Route path='search' element={<Search path='search/movie' />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
     </>

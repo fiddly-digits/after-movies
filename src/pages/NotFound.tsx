@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useTitle } from '../hooks/useTitle';
 import PageNotFound from '../assets/notFound.jpg';
 
 export function NotFound() {
+  useTitle('Not Found');
   return (
     <main>
       <section className='flex flex-col justify-center px-2'>
