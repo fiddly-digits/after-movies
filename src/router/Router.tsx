@@ -1,34 +1,44 @@
 import { Routes, Route } from 'react-router-dom';
-import { MovieList, MovieDetail, Search, NotFound } from '../pages';
+import { MovieList, MovieDetail, SearchList, NotFound } from '../pages';
+import { PathRoutes, APIPathRoutes } from '../utils/pathRoutes';
 
 export function Router() {
+  const { Home, Popular, Top, Upcoming, Search, Movie, Wildcard } = PathRoutes;
+
   return (
     <>
       <Routes>
         <Route
-          path='/'
+          path={Home}
           element={
             <MovieList
-              path='movie/now_playing'
+              path={APIPathRoutes[Home]}
               title='Home | Now Playing Movies'
             />
           }
         />
-        <Route path='movie/:id' element={<MovieDetail />} />
+        <Route path={Movie} element={<MovieDetail />} />
         <Route
-          path='movies/popular'
-          element={<MovieList path='movie/popular' title='Popular Movies' />}
+          path={Popular}
+          element={
+            <MovieList path={APIPathRoutes[Popular]} title='Popular Movies' />
+          }
         />
         <Route
-          path='movies/top'
-          element={<MovieList path='movie/top_rated' title='Top Movies' />}
+          path={Top}
+          element={<MovieList path={APIPathRoutes[Top]} title='Top Movies' />}
         />
         <Route
-          path='movies/upcoming'
-          element={<MovieList path='movie/upcoming' title='Upcoming Movies' />}
+          path={Upcoming}
+          element={
+            <MovieList path={APIPathRoutes[Upcoming]} title='Upcoming Movies' />
+          }
         />
-        <Route path='search' element={<Search path='search/movie' />} />
-        <Route path='*' element={<NotFound />} />
+        <Route
+          path={Search}
+          element={<SearchList path={APIPathRoutes[Search]} />}
+        />
+        <Route path={Wildcard} element={<NotFound />} />
       </Routes>
     </>
   );

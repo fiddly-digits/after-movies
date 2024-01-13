@@ -8,7 +8,7 @@ type props = {
   path: string;
 };
 
-export function Search({ path }: props) {
+export function SearchList({ path }: props) {
   const [searchParams] = useSearchParams();
   const queryTerm = searchParams.get('q');
   const { data: movies } = useFetch<Movie[]>(path, 1, queryTerm || '');

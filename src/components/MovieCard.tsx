@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Movie } from '../types/types';
-import defaultBackdrop from '../assets/default.jpg';
 import dayjs from 'dayjs';
+import defaultBackdrop from '../assets/default.jpg';
 
 type props = {
   movie: Movie;

@@ -1,7 +1,7 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import logo from '../assets/morningafter.png';
 import { useEffect, useState } from 'react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { cn } from '../utils/themeMerge';
+import logo from '../assets/morningafter.png';
 
 export function Header() {
   const [searchHidden, setSearchHidden] = useState(true);

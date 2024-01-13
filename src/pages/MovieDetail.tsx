@@ -2,6 +2,10 @@ import { useFetch } from '../hooks/useFetch';
 import { useParams } from 'react-router-dom';
 import { MovieData } from '../types/types';
 import { useTitle } from '../hooks/useTitle';
+import imdb from '../assets/imdb.png';
+import dayjs from 'dayjs';
+
+// ! Add a Return Button
 
 export function MovieDetail() {
   const { id } = useParams();
@@ -18,13 +22,11 @@ export function MovieDetail() {
     title,
     vote_average: average,
     vote_count: count,
-    //imdb_id: imdbID,
-    //popularity,
-    //status,
-    //tagline,
-    //original_title: originalTitle,
-    overview
-    //release_date: releaseDate
+    imdb_id: imdbID,
+    tagline,
+    original_title: originalTitle,
+    overview,
+    release_date: releaseDate
   } = movie;
 
   return (
@@ -34,13 +36,28 @@ export function MovieDetail() {
           <img
             src={`https://image.tmdb.org/t/p/w500/${posterPath}`}
             alt={title}
+            className='rounded-lg'
           />
         </div>
         <div className='max-w-2xl text-lg text-gray-700 dark:text-white'>
-          <h1 className='my-3 text-4xl font-bold text-center lg:text-left'>
+          <h1 className='mt-3 text-4xl font-bold text-center lg:text-left'>
             {title}
           </h1>
+          <h2 className='mb-3 text-2xl text-center text-gray-600 lg:text-left'>
+            {tagline}
+          </h2>
+
+          <p className='my-2 text-xl'>
+            <span className='font-bold'>Original Title: </span>
+            {originalTitle}
+          </p>
+          <p className='my-2 text-xl'>
+            <span className='font-bold'>Release Date: </span>
+            {dayjs(releaseDate).format('MMMM D, YYYY')}
+          </p>
+
           <p className='my-4'>{overview}</p>
+          <p className='my-4 font-bold'>Genres:</p>
           {genres && (
             <p className='flex flex-wrap gap-2 my-7'>
               {genres.map((genre) => (
@@ -53,7 +70,7 @@ export function MovieDetail() {
               ))}
             </p>
           )}
-          <div className='flex items-center'>
+          <div className='flex items-center my-4'>
             <svg
               className='w-4 h-4 text-yellow-300 me-1'
               aria-hidden='true'
@@ -70,10 +87,14 @@ export function MovieDetail() {
             <span className='text-sm font-medium text-gray-900 dark:text-white'>
               {count} reviews
             </span>
-            <p className='my-4'>
-              <span className='mr-2 font-bold'></span>
-            </p>
           </div>
+          <a
+            href={`https://www.imdb.com/title/${imdbID}`}
+            className='flex items-center my-4'
+          >
+            <span className='mr-2 font-bold'>More Info </span>
+            <img src={imdb} alt='imdb logo' className='w-16 ' />
+          </a>
         </div>
       </section>
     </main>

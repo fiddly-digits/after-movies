@@ -3,6 +3,8 @@ import { MovieCard } from '../components';
 import { Movie } from '../types/types';
 import { useTitle } from '../hooks/useTitle';
 
+//! Add Pagination
+
 type props = {
   path: string;
   title: string;
