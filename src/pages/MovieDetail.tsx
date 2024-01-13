@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { MovieData } from '../types/types';
 import { useTitle } from '../hooks/useTitle';
 import imdb from '../assets/imdb.png';
+import genericPoster from '../assets/genericPoster.png';
 import dayjs from 'dayjs';
 
 // ! Add a Return Button
@@ -34,7 +35,11 @@ export function MovieDetail() {
       <section className='flex flex-wrap justify-around py-5'>
         <div className='max-w-sm'>
           <img
-            src={`https://image.tmdb.org/t/p/w500/${posterPath}`}
+            src={
+              posterPath
+                ? `https://image.tmdb.org/t/p/w500/${posterPath}`
+                : genericPoster
+            }
             alt={title}
             className='rounded-lg'
           />

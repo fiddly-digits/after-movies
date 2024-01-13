@@ -8,6 +8,7 @@ export const useFetch = <T extends Movie[] | MovieData>(
   queryTerm?: string
 ) => {
   const [data, setData] = useState<T | null>(null);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     async function fetchData() {
@@ -17,10 +18,11 @@ export const useFetch = <T extends Movie[] | MovieData>(
         }&query=${queryTerm}`
       );
       const json = await response.json();
+      json.total_pages ? setTotalPages(json.total_pages) : setTotalPages(0);
       json.results ? setData(json.results) : setData(json);
     }
     fetchData();
   }, [path, page, queryTerm]);
 
-  return { data };
+  return { data, totalPages };
 };
