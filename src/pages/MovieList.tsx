@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useFetch } from '../hooks/useFetch';
+import usePersistent from '../hooks/usePersistent';
 import { MovieCard } from '../components';
 import { Movie } from '../types/types';
 import { useTitle } from '../hooks/useTitle';
@@ -14,7 +14,8 @@ type props = {
 };
 
 export function MovieList({ path, title }: props) {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = usePersistent(1, 'movieListPage');
+
   const { data: movies, totalPages } = useFetch<Movie[]>(path, page);
   useTitle(title);
 
@@ -32,9 +33,13 @@ export function MovieList({ path, title }: props) {
           <button
             className={cn(
               'flex items-center justify-center h-10 px-4 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg me-3 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white',
-              { hidden: page === 1 }
+              {
+                'text-white bg-white border-white dark:bg-gray-800 dark:border-gray-800 dark:text-gray-800 hover:bg-white hover:text-white dark:hover:bg-gray-800 dark:hover:text-gray-800':
+                  page === 1
+              }
             )}
             onClick={() => (page !== 1 ? setPage(page - 1) : setPage(page))}
+            disabled={page === 1}
           >
             <svg
               className='w-3.5 h-3.5 me-2 rtl:rotate-180'
@@ -58,12 +63,16 @@ export function MovieList({ path, title }: props) {
           </span>
           <button
             className={cn(
-              'flex items-center justify-center h-10 px-4 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white',
-              { hidden: page === totalPages }
+              'flex items-center justify-center h-10 px-4 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700',
+              {
+                'text-white bg-white border-white dark:bg-gray-800 dark:border-gray-800 dark:text-gray-800 hover:bg-white hover:text-white dark:hover:bg-gray-800':
+                  page === totalPages
+              }
             )}
             onClick={() =>
               page !== totalPages ? setPage(page + 1) : setPage(1)
             }
+            disabled={page === totalPages}
           >
             Next
             <svg

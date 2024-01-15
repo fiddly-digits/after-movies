@@ -1,9 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 import { MovieList, MovieDetail, SearchList, NotFound } from '../pages';
-import { PathRoutes, APIPathRoutes } from '../utils/pathRoutes';
+import { PathRoutes, APIPathRoutes } from '../utils/enums';
 
 export function Router() {
-  const { Home, Popular, Top, Upcoming, Search, Movie, Wildcard } = PathRoutes;
+  const { Home, Popular, Top, Upcoming, Search, Movie } = PathRoutes;
+
+  //todo switch component router for functional router
 
   return (
     <>
@@ -38,7 +40,7 @@ export function Router() {
           path={Search}
           element={<SearchList path={APIPathRoutes[Search]} />}
         />
-        <Route path={Wildcard} element={<NotFound />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   );
