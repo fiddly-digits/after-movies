@@ -15,7 +15,6 @@ type props = {
 
 export function MovieList({ path, title }: props) {
   const [page, setPage] = usePersistent(1, 'movieListPage');
-
   const { data: movies, totalPages } = useFetch<Movie[]>(path, page);
   useTitle(title);
 

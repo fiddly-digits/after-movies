@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 function usePersistent(
   initialState: number,
   key: string
-): [number, React.Dispatch<React.SetStateAction<number>>, () => void] {
+): [number, React.Dispatch<React.SetStateAction<number>>] {
   const [state, setState] = useState(() => {
     const savedState = localStorage.getItem(key);
     return savedState !== null ? Number(savedState) : initialState;
@@ -13,12 +13,7 @@ function usePersistent(
     localStorage.setItem(key, String(state));
   }, [key, state]);
 
-  const reset = () => {
-    localStorage.removeItem(key);
-    setState(initialState);
-  };
-
-  return [state, setState, reset];
+  return [state, setState];
 }
 
 export default usePersistent;
