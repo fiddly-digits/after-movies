@@ -43,14 +43,16 @@ export function MovieCard({ movie }: props) {
           </p>
           {genreIDS && (
             <p className='flex flex-wrap gap-2 mb-3'>
-              {genreIDS.map((genreID) => (
-                <span
-                  className='p-2 border border-gray-300 rounded shadow-lg dark:border-gray-600 dark:text-white hover:bg-gray-300 dark:hover:text-black'
-                  key={GenreName[genreID]}
-                >
-                  {GenreName[genreID]}
-                </span>
-              ))}
+              {genreIDS
+                .filter((_genreID, index) => index < 4)
+                .map((genreID) => (
+                  <span
+                    className='p-2 border border-gray-300 rounded shadow-lg dark:border-gray-600 dark:text-white hover:bg-gray-300 dark:hover:text-black'
+                    key={GenreName[genreID]}
+                  >
+                    {GenreName[genreID]}
+                  </span>
+                ))}
             </p>
           )}
         </div>
